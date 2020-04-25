@@ -48,3 +48,30 @@ export const moveUp = (tiles = [], rows = 4, columns = 4) => {
 
   return newTiles;
 };
+
+export const moveRight = (tiles = [], rows = 4, columns = 4) => {
+  const newTiles = [...tiles];
+  let bottomIndex = tiles.length - 2;
+  let i = bottomIndex;
+
+  while (newTiles.length - 1 - i !== columns) {
+    if (newTiles[i + 1]) {
+      if (newTiles[i + 1] === newTiles[i]) {
+        newTiles[i + 1] = newTiles[i + 1] + newTiles[i];
+        newTiles[i] = null;
+      }
+    } else {
+      newTiles[i + 1] = newTiles[i];
+      newTiles[i] = null;
+    }
+
+    if (i - columns < 0) {
+      bottomIndex -= 1;
+      i = bottomIndex;
+    } else {
+      i -= columns;
+    }
+  }
+
+  return newTiles;
+};
