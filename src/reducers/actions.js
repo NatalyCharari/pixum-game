@@ -1,4 +1,4 @@
-import { getInitialBoard } from "../utils/game";
+import { getInitialBoard, moveLeft } from "../utils/game";
 
 export const INIT_BOARD = "INIT_BOARD";
 export const MOVE_LEFT = "MOVE_LEFT";
@@ -15,23 +15,33 @@ const initBoard = (board, rows, cols) => ({
   },
 });
 
-const moveLeft = () => ({
+const moveToLeft = (board) => ({
   type: MOVE_LEFT,
+  payload: {
+    board,
+  },
 });
 
-const moveRight = () => ({
+const moveToRight = () => ({
   type: MOVE_RIGHT,
 });
 
-const moveUp = () => ({
+const moveToUp = () => ({
   type: MOVE_UP,
 });
 
-const moveDown = () => ({
+const moveToDown = () => ({
   type: MOVE_DOWN,
 });
 
 export const loadBoard = (rows = 4, cols = 4) => (dispatch) => {
   const board = getInitialBoard(rows, cols);
   dispatch(initBoard(board, rows, cols));
+};
+
+export const moveCellsToLeft = (board = [], rows = 4, cols = 4) => (
+  dispatch
+) => {
+  const newBoard = moveLeft(board, rows, cols);
+  dispatch(moveToLeft(newBoard));
 };

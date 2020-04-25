@@ -22,10 +22,31 @@ const styles = () => ({
   },
 });
 
-const Board = ({ classes, tiles, rows, columns, loadBoard }) => {
+const Board = ({ classes, tiles, rows, columns, loadBoard, moveLeft }) => {
   useEffect(() => {
     loadBoard();
-  }, []);
+  }, [loadBoard]);
+
+  useEffect(() => {
+    window.addEventListener("keydown", onKeyPressed);
+  }, [tiles]);
+
+  const onKeyPressed = (event) => {
+    console.log("tiles", tiles, rows, columns);
+    switch (event.key) {
+      case "ArrowDown":
+        break;
+      case "ArrowUp":
+        break;
+      case "ArrowLeft":
+        moveLeft(tiles, rows, columns);
+        break;
+      case "ArrowRight":
+        break;
+      default:
+        break;
+    }
+  };
 
   const renderCells = (data, rowIndex) => {
     return data.map((value, index) => (
@@ -67,6 +88,7 @@ Board.defaultProps = {
   rows: 0,
   columns: 0,
   loadBoard: () => {},
+  moveLeft: () => {},
 };
 
 Board.propTypes = {
@@ -74,6 +96,7 @@ Board.propTypes = {
   rows: PropTypes.number,
   columns: PropTypes.number,
   loadBoard: PropTypes.func,
+  moveLeft: PropTypes.func,
 };
 
 export default withStyles(styles, { name: "Board" })(Board);
