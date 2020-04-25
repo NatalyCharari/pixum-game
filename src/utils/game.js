@@ -103,25 +103,50 @@ export const moveLeft = (tiles = [], rows = 4, columns = 4) => {
   return newTiles;
 };
 
-const addNewValue = (tiles = [], rows, columns, index) => {
+export const addValueToTheTop = (tiles = [], rows = 4, columns = 4) => {
   const newTiles = [...tiles];
-  const random = randomIntFromInterval(0, 2);
-  newTiles[index] = random === 0 ? null : random;
+
+  for (let i = columns - 1; i >= 0; i--) {
+    if (!tiles[i]) {
+      newTiles[i] = randomIntFromInterval(1, 2);
+      break;
+    }
+  }
   return newTiles;
 };
 
-export const addTopRightValue = (tiles = [], rows = 4, columns = 4) => {
-  return addNewValue(tiles, rows, columns, columns - 1);
+export const addValueToTheLeft = (tiles = [], rows = 4, columns = 4) => {
+  const newTiles = [...tiles];
+
+  for (let i = 0; i < newTiles.length; i += columns) {
+    if (!tiles[i]) {
+      newTiles[i] = randomIntFromInterval(1, 2);
+      break;
+    }
+  }
+  return newTiles;
 };
 
-export const addTopLeftValue = (tiles = [], rows = 4, columns = 4) => {
-  return addNewValue(tiles, rows, columns, 0);
+export const addValueToTheBottom = (tiles = [], rows = 4, columns = 4) => {
+  const newTiles = [...tiles];
+
+  for (let i = newTiles.length - 1; i >= newTiles.length - columns; i--) {
+    if (!tiles[i]) {
+      newTiles[i] = randomIntFromInterval(1, 2);
+      break;
+    }
+  }
+  return newTiles;
 };
 
-export const addBottomRightValue = (tiles = [], rows = 4, columns = 4) => {
-  return addNewValue(tiles, rows, columns, columns * rows - 1);
-};
+export const addValueToTheRight = (tiles = [], rows = 4, columns = 4) => {
+  const newTiles = [...tiles];
 
-export const addBottomLeftValue = (tiles = [], rows = 4, columns = 4) => {
-  return addNewValue(tiles, rows, columns, columns);
+  for (let i = columns - 1; i < newTiles.length; i += columns) {
+    if (!tiles[i]) {
+      newTiles[i] = randomIntFromInterval(1, 2);
+      break;
+    }
+  }
+  return newTiles;
 };
