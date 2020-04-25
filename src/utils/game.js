@@ -151,7 +151,7 @@ export const addValueToTheRight = (tiles = [], rows = 4, columns = 4) => {
   return newTiles;
 };
 
-const findEqualityInNeighborhood = (tiles, i, columns) => {
+export const findEqualityInNeighborhood = (tiles, i, columns) => {
   if (i - columns >= 0 && tiles[i - columns] === tiles[i]) {
     // The top value is equal to tiles[i]
     return true;

@@ -40,3 +40,9 @@ export const demoBoard2 = [
 
 // Custom Board 5 x 2
 export const demoBoard3 = [1, null, 1, 2, null, null, 2, 2, null, null];
+
+// Custom Board 3 x 3
+export const demoBoard4 = [null, 1, null, 1, 2, 1, null, 1, null];
+
+// Custom Board 3 x 3
+export const demoBoard5 = [null, 2, null, 1, 2, 1, null, 1, null];
