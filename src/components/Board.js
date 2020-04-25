@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 
 import { withStyles } from "@material-ui/core/styles";
 
+import Alert from "@material-ui/lab/Alert";
+import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 
 import Table from "@material-ui/core/Table";
@@ -23,6 +25,13 @@ const styles = () => ({
   cell: {
     border: "1px solid rgba(0, 0, 0, 0.2)",
   },
+  buttonCheck: {
+    marginTop: 40,
+    float: "right",
+  },
+  alert: {
+    marginTop: 20,
+  },
 });
 
 const Board = ({
@@ -35,6 +44,8 @@ const Board = ({
   moveRight,
   moveUp,
   moveDown,
+  checkGameOver,
+  gameOver,
 }) => {
   useEffect(() => {
     loadBoard();
@@ -85,6 +96,10 @@ const Board = ({
     return components;
   };
 
+  const onButtonClicked = () => {
+    checkGameOver(tiles, rows, columns);
+  };
+
   return (
     <div
       className={classes.root}
@@ -95,6 +110,25 @@ const Board = ({
         <Table className={classes.table} aria-label="spanning table">
           <TableBody>{renderRows()}</TableBody>
         </Table>
+
+        {gameOver ? (
+          <Alert severity="error" color="error" className={classes.alert}>
+            {"Game Over"}
+          </Alert>
+        ) : (
+          <Alert severity="success" color="info" className={classes.alert}>
+            {"More moves available"}
+          </Alert>
+        )}
+
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.buttonCheck}
+          onClick={onButtonClicked}
+        >
+          {"Check Moves"}
+        </Button>
       </TableContainer>
     </div>
   );
@@ -109,6 +143,8 @@ Board.defaultProps = {
   moveRight: () => {},
   moveUp: () => {},
   moveDown: () => {},
+  checkGameOver: () => {},
+  gameOver: false,
 };
 
 Board.propTypes = {
@@ -120,6 +156,8 @@ Board.propTypes = {
   moveRight: PropTypes.func,
   moveUp: PropTypes.func,
   moveDown: PropTypes.func,
+  checkGameOver: PropTypes.func,
+  gameOver: PropTypes.bool,
 };
 
 export default withStyles(styles, { name: "Board" })(Board);

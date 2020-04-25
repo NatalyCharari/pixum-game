@@ -150,3 +150,7 @@ export const addValueToTheRight = (tiles = [], rows = 4, columns = 4) => {
   }
   return newTiles;
 };
+
+export const findMoreMoves = (tiles = [], rows = 4, columns = 4) => {
+  return false;
+};

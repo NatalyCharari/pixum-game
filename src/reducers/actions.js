@@ -8,10 +8,12 @@ import {
   addValueToTheLeft,
   addValueToTheBottom,
   addValueToTheTop,
+  findMoreMoves,
 } from "../utils/game";
 
 export const INIT_BOARD = "INIT_BOARD";
 export const UPDATE_BOARD = "UPDATE_BOARD";
+export const UPDATE_GAME_STATE = "UPDATE_GAME_STATE";
 
 const initBoard = (board, rows, cols) => ({
   type: INIT_BOARD,
@@ -26,6 +28,13 @@ const updateBoard = (board) => ({
   type: UPDATE_BOARD,
   payload: {
     board,
+  },
+});
+
+const updateGameSate = (moreMoves) => ({
+  type: UPDATE_GAME_STATE,
+  payload: {
+    gameOver: !moreMoves,
   },
 });
 
@@ -60,4 +69,11 @@ export const moveCellsDown = (board = [], rows = 4, cols = 4) => (dispatch) => {
   const movedBoard = moveDown(board, rows, cols);
   const withNewValue = addValueToTheTop(movedBoard, rows, cols);
   dispatch(updateBoard(withNewValue));
+};
+
+export const checkBoardMoves = (board = [], rows = 4, cols = 4) => (
+  dispatch
+) => {
+  const moreMoves = findMoreMoves(board, rows, cols);
+  dispatch(updateGameSate(moreMoves));
 };

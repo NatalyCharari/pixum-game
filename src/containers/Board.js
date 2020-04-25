@@ -7,6 +7,7 @@ import {
   moveCellsToLeft,
   moveCellsToRight,
   moveCellsUp,
+  checkBoardMoves,
 } from "../reducers/actions";
 
 export const BoardContainer = (props) => {
@@ -17,6 +18,7 @@ const mapStateToProps = ({ reduxState }) => ({
   tiles: reduxState.board,
   rows: reduxState.rows,
   columns: reduxState.cols,
+  gameOver: reduxState.gameOver,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -28,6 +30,8 @@ const mapDispatchToProps = (dispatch) => ({
   moveUp: (board, rows, columns) => dispatch(moveCellsUp(board, rows, columns)),
   moveDown: (board, rows, columns) =>
     dispatch(moveCellsDown(board, rows, columns)),
+  checkGameOver: (board, rows, columns) =>
+    dispatch(checkBoardMoves(board, rows, columns)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardContainer);

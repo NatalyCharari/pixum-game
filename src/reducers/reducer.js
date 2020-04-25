@@ -1,4 +1,4 @@
-import { INIT_BOARD, UPDATE_BOARD } from "./actions";
+import { INIT_BOARD, UPDATE_BOARD, UPDATE_GAME_STATE } from "./actions";
 
 const initialState = {
   app: {
@@ -7,6 +7,7 @@ const initialState = {
   board: [],
   rows: 0,
   cols: 0,
+  gameOver: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -20,6 +21,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         board: action.payload.board,
+      };
+    case UPDATE_GAME_STATE:
+      return {
+        ...state,
+        gameOver: action.payload.gameOver,
       };
     default:
       return state;
