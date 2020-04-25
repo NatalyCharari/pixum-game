@@ -102,3 +102,26 @@ export const moveLeft = (tiles = [], rows = 4, columns = 4) => {
 
   return newTiles;
 };
+
+const addNewValue = (tiles = [], rows, columns, index) => {
+  const newTiles = [...tiles];
+  const random = randomIntFromInterval(0, 2);
+  newTiles[index] = random === 0 ? null : random;
+  return newTiles;
+};
+
+export const addTopRightValue = (tiles = [], rows = 4, columns = 4) => {
+  return addNewValue(tiles, rows, columns, columns - 1);
+};
+
+export const addTopLeftValue = (tiles = [], rows = 4, columns = 4) => {
+  return addNewValue(tiles, rows, columns, 0);
+};
+
+export const addBottomRightValue = (tiles = [], rows = 4, columns = 4) => {
+  return addNewValue(tiles, rows, columns, columns * rows - 1);
+};
+
+export const addBottomLeftValue = (tiles = [], rows = 4, columns = 4) => {
+  return addNewValue(tiles, rows, columns, columns);
+};
