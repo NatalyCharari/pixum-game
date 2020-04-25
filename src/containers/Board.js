@@ -5,6 +5,7 @@ import {
   loadBoard,
   moveCellsToLeft,
   moveCellsToRight,
+  moveCellsUp,
 } from "../reducers/actions";
 
 export const BoardContainer = (props) => {
@@ -23,6 +24,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(moveCellsToLeft(board, rows, columns)),
   moveRight: (board, rows, columns) =>
     dispatch(moveCellsToRight(board, rows, columns)),
+  moveUp: (board, rows, columns) => dispatch(moveCellsUp(board, rows, columns)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardContainer);

@@ -1,4 +1,4 @@
-import { INIT_BOARD, MOVE_LEFT, MOVE_RIGHT } from "./actions";
+import { INIT_BOARD, MOVE_CELLS } from "./actions";
 
 const initialState = {
   app: {
@@ -16,12 +16,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         ...action.payload,
       };
-    case MOVE_LEFT:
-      return {
-        ...state,
-        board: action.payload.board,
-      };
-    case MOVE_RIGHT:
+    case MOVE_CELLS:
       return {
         ...state,
         board: action.payload.board,

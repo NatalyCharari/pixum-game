@@ -33,6 +33,7 @@ const Board = ({
   loadBoard,
   moveLeft,
   moveRight,
+  moveUp,
 }) => {
   useEffect(() => {
     loadBoard();
@@ -43,6 +44,7 @@ const Board = ({
       case "ArrowDown":
         break;
       case "ArrowUp":
+        moveUp(tiles, rows, columns);
         break;
       case "ArrowLeft":
         moveLeft(tiles, rows, columns);
@@ -103,6 +105,7 @@ Board.defaultProps = {
   loadBoard: () => {},
   moveLeft: () => {},
   moveRight: () => {},
+  moveUp: () => {},
 };
 
 Board.propTypes = {
@@ -112,6 +115,7 @@ Board.propTypes = {
   loadBoard: PropTypes.func,
   moveLeft: PropTypes.func,
   moveRight: PropTypes.func,
+  moveUp: PropTypes.func,
 };
 
 export default withStyles(styles, { name: "Board" })(Board);
