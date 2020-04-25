@@ -1,4 +1,10 @@
-import { getInitialBoard, moveLeft, moveRight, moveUp } from "../utils/game";
+import {
+  getInitialBoard,
+  moveLeft,
+  moveRight,
+  moveUp,
+  moveDown,
+} from "../utils/game";
 
 export const INIT_BOARD = "INIT_BOARD";
 export const MOVE_CELLS = "MOVE_CELLS";
@@ -40,5 +46,10 @@ export const moveCellsToRight = (board = [], rows = 4, cols = 4) => (
 
 export const moveCellsUp = (board = [], rows = 4, cols = 4) => (dispatch) => {
   const newBoard = moveUp(board, rows, cols);
+  dispatch(moveCells(newBoard));
+};
+
+export const moveCellsDown = (board = [], rows = 4, cols = 4) => (dispatch) => {
+  const newBoard = moveDown(board, rows, cols);
   dispatch(moveCells(newBoard));
 };

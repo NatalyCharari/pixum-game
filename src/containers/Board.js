@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Board from "../components/Board";
 import {
   loadBoard,
+  moveCellsDown,
   moveCellsToLeft,
   moveCellsToRight,
   moveCellsUp,
@@ -25,6 +26,8 @@ const mapDispatchToProps = (dispatch) => ({
   moveRight: (board, rows, columns) =>
     dispatch(moveCellsToRight(board, rows, columns)),
   moveUp: (board, rows, columns) => dispatch(moveCellsUp(board, rows, columns)),
+  moveDown: (board, rows, columns) =>
+    dispatch(moveCellsDown(board, rows, columns)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BoardContainer);

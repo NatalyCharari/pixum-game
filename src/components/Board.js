@@ -34,6 +34,7 @@ const Board = ({
   moveLeft,
   moveRight,
   moveUp,
+  moveDown,
 }) => {
   useEffect(() => {
     loadBoard();
@@ -42,6 +43,7 @@ const Board = ({
   const onKeyPressed = (event) => {
     switch (event.key) {
       case "ArrowDown":
+        moveDown(tiles, rows, columns);
         break;
       case "ArrowUp":
         moveUp(tiles, rows, columns);
@@ -106,6 +108,7 @@ Board.defaultProps = {
   moveLeft: () => {},
   moveRight: () => {},
   moveUp: () => {},
+  moveDown: () => {},
 };
 
 Board.propTypes = {
@@ -116,6 +119,7 @@ Board.propTypes = {
   moveLeft: PropTypes.func,
   moveRight: PropTypes.func,
   moveUp: PropTypes.func,
+  moveDown: PropTypes.func,
 };
 
 export default withStyles(styles, { name: "Board" })(Board);
