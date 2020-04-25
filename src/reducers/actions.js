@@ -31,7 +31,7 @@ const moveDown = () => ({
   type: MOVE_DOWN,
 });
 
-export const fillBoard = (rows = 4, cols = 4) => (dispatch) => {
+export const loadBoard = (rows = 4, cols = 4) => (dispatch) => {
   const board = getInitialBoard(rows, cols);
   dispatch(initBoard(board, rows, cols));
 };
