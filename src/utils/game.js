@@ -151,6 +151,36 @@ export const addValueToTheRight = (tiles = [], rows = 4, columns = 4) => {
   return newTiles;
 };
 
+const findEqualityInNeighborhood = (tiles, i, columns) => {
+  if (i - columns >= 0 && tiles[i - columns] === tiles[i]) {
+    // The top value is equal to tiles[i]
+    return true;
+  }
+  if (i + columns >= 0 && tiles[i + columns] === tiles[i]) {
+    // The bottom value is equal to tiles[i]
+    return true;
+  }
+  if (
+    i + 1 < tiles.length &&
+    (i + 1) % columns !== 0 &&
+    tiles[i + 1] === tiles[i]
+  ) {
+    // The right value is equal to tiles[i]
+    return true;
+  }
+
+  // Check the left value
+  return i - 1 >= 0 && i % columns !== 0 && tiles[i - 1] === tiles[i];
+};
+
 export const findMoreMoves = (tiles = [], rows = 4, columns = 4) => {
+  for (let i = 0; i < tiles.length - 1; i++) {
+    if (tiles[i]) {
+      if (findEqualityInNeighborhood(tiles, i, columns)) return true;
+    } else {
+      return true;
+    }
+  }
+
   return false;
 };
