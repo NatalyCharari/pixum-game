@@ -4,10 +4,14 @@ import {
   moveRight,
   moveUp,
   moveDown,
+  addValueToTheRight,
+  addValueToTheLeft,
+  addValueToTheBottom,
+  addValueToTheTop,
 } from "../utils/game";
 
 export const INIT_BOARD = "INIT_BOARD";
-export const MOVE_CELLS = "MOVE_CELLS";
+export const UPDATE_BOARD = "UPDATE_BOARD";
 
 const initBoard = (board, rows, cols) => ({
   type: INIT_BOARD,
@@ -18,8 +22,8 @@ const initBoard = (board, rows, cols) => ({
   },
 });
 
-const moveCells = (board) => ({
-  type: MOVE_CELLS,
+const updateBoard = (board) => ({
+  type: UPDATE_BOARD,
   payload: {
     board,
   },
@@ -33,23 +37,27 @@ export const loadBoard = (rows = 4, cols = 4) => (dispatch) => {
 export const moveCellsToLeft = (board = [], rows = 4, cols = 4) => (
   dispatch
 ) => {
-  const newBoard = moveLeft(board, rows, cols);
-  dispatch(moveCells(newBoard));
+  const movedBoard = moveLeft(board, rows, cols);
+  const withNewValue = addValueToTheRight(movedBoard, rows, cols);
+  dispatch(updateBoard(withNewValue));
 };
 
 export const moveCellsToRight = (board = [], rows = 4, cols = 4) => (
   dispatch
 ) => {
-  const newBoard = moveRight(board, rows, cols);
-  dispatch(moveCells(newBoard));
+  const movedBoard = moveRight(board, rows, cols);
+  const withNewValue = addValueToTheLeft(movedBoard, rows, cols);
+  dispatch(updateBoard(withNewValue));
 };
 
 export const moveCellsUp = (board = [], rows = 4, cols = 4) => (dispatch) => {
-  const newBoard = moveUp(board, rows, cols);
-  dispatch(moveCells(newBoard));
+  const movedBoard = moveUp(board, rows, cols);
+  const withNewValue = addValueToTheBottom(movedBoard, rows, cols);
+  dispatch(updateBoard(withNewValue));
 };
 
 export const moveCellsDown = (board = [], rows = 4, cols = 4) => (dispatch) => {
-  const newBoard = moveDown(board, rows, cols);
-  dispatch(moveCells(newBoard));
+  const movedBoard = moveDown(board, rows, cols);
+  const withNewValue = addValueToTheTop(movedBoard, rows, cols);
+  dispatch(updateBoard(withNewValue));
 };

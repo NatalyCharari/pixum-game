@@ -1,4 +1,4 @@
-import { INIT_BOARD, MOVE_CELLS } from "./actions";
+import { INIT_BOARD, UPDATE_BOARD } from "./actions";
 
 const initialState = {
   app: {
@@ -16,7 +16,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         ...action.payload,
       };
-    case MOVE_CELLS:
+    case UPDATE_BOARD:
       return {
         ...state,
         board: action.payload.board,
