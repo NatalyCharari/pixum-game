@@ -1,4 +1,4 @@
-import { INIT_BOARD, MOVE_LEFT } from "./actions";
+import { INIT_BOARD, MOVE_LEFT, MOVE_RIGHT } from "./actions";
 
 const initialState = {
   app: {
@@ -17,6 +17,11 @@ const reducer = (state = initialState, action) => {
         ...action.payload,
       };
     case MOVE_LEFT:
+      return {
+        ...state,
+        board: action.payload.board,
+      };
+    case MOVE_RIGHT:
       return {
         ...state,
         board: action.payload.board,

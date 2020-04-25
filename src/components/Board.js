@@ -13,6 +13,9 @@ import TableContainer from "@material-ui/core/TableContainer";
 
 const styles = () => ({
   root: {
+    height: "90vh",
+  },
+  container: {
     width: "40%",
     padding: "4%",
     margin: "auto",
@@ -22,17 +25,20 @@ const styles = () => ({
   },
 });
 
-const Board = ({ classes, tiles, rows, columns, loadBoard, moveLeft }) => {
+const Board = ({
+  classes,
+  tiles,
+  rows,
+  columns,
+  loadBoard,
+  moveLeft,
+  moveRight,
+}) => {
   useEffect(() => {
     loadBoard();
   }, [loadBoard]);
 
-  useEffect(() => {
-    window.addEventListener("keydown", onKeyPressed);
-  }, [tiles]);
-
   const onKeyPressed = (event) => {
-    console.log("tiles", tiles, rows, columns);
     switch (event.key) {
       case "ArrowDown":
         break;
@@ -42,6 +48,7 @@ const Board = ({ classes, tiles, rows, columns, loadBoard, moveLeft }) => {
         moveLeft(tiles, rows, columns);
         break;
       case "ArrowRight":
+        moveRight(tiles, rows, columns);
         break;
       default:
         break;
@@ -75,11 +82,17 @@ const Board = ({ classes, tiles, rows, columns, loadBoard, moveLeft }) => {
   };
 
   return (
-    <TableContainer className={classes.root} component={Paper}>
-      <Table className={classes.table} aria-label="spanning table">
-        <TableBody>{renderRows()}</TableBody>
-      </Table>
-    </TableContainer>
+    <div
+      className={classes.root}
+      tabIndex={0}
+      onKeyDown={(event) => onKeyPressed(event)}
+    >
+      <TableContainer className={classes.container} component={Paper}>
+        <Table className={classes.table} aria-label="spanning table">
+          <TableBody>{renderRows()}</TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 };
 
@@ -89,6 +102,7 @@ Board.defaultProps = {
   columns: 0,
   loadBoard: () => {},
   moveLeft: () => {},
+  moveRight: () => {},
 };
 
 Board.propTypes = {
@@ -97,6 +111,7 @@ Board.propTypes = {
   columns: PropTypes.number,
   loadBoard: PropTypes.func,
   moveLeft: PropTypes.func,
+  moveRight: PropTypes.func,
 };
 
 export default withStyles(styles, { name: "Board" })(Board);
