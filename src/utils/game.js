@@ -75,3 +75,30 @@ export const moveRight = (tiles = [], rows = 4, columns = 4) => {
 
   return newTiles;
 };
+
+export const moveLeft = (tiles = [], rows = 4, columns = 4) => {
+  const newTiles = [...tiles];
+  let topIndex = 1;
+  let i = topIndex;
+
+  while (i < newTiles.length) {
+    if (newTiles[i - 1]) {
+      if (newTiles[i - 1] === newTiles[i]) {
+        newTiles[i - 1] = newTiles[i - 1] + newTiles[i];
+        newTiles[i] = null;
+      }
+    } else {
+      newTiles[i - 1] = newTiles[i];
+      newTiles[i] = null;
+    }
+
+    if ((i + 1) % columns === 0) {
+      topIndex += columns;
+      i = topIndex;
+    } else {
+      i += 1;
+    }
+  }
+
+  return newTiles;
+};
