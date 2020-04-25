@@ -1,5 +1,5 @@
 import { moveUp } from "../game";
-import { demoBoard1, demoBoard2 } from "../__mock__/mockedBoards";
+import { demoBoard1, demoBoard2, demoBoard3 } from "../__mock__/mockedBoards";
 
 describe("Test game logic", () => {
   it("should generate a new board after moving up - case 1", () => {
@@ -45,6 +45,12 @@ describe("Test game logic", () => {
       null,
     ];
     const generatedBoard = moveUp(demoBoard2);
+
+    expect(generatedBoard).toEqual(expectedBoard);
+  });
+  it("should generate a new board after moving up - case 3", () => {
+    const expectedBoard = [1, 2, 1, 2, null, null, null, 2, null, null];
+    const generatedBoard = moveUp(demoBoard3, 2, 5);
 
     expect(generatedBoard).toEqual(expectedBoard);
   });

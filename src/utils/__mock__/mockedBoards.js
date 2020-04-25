@@ -1,3 +1,4 @@
+// Custom Board 4 x 4
 export const demoBoard1 = [
   null,
   1,
@@ -17,6 +18,7 @@ export const demoBoard1 = [
   2,
 ];
 
+// Pixum Board
 export const demoBoard2 = [
   1,
   null,
@@ -35,3 +37,6 @@ export const demoBoard2 = [
   1,
   null,
 ];
+
+// Custom Board 5 x 2
+export const demoBoard3 = [1, null, 1, 2, null, null, 2, 2, null, null];
