@@ -30,3 +30,21 @@ export const moveDown = (tiles = [], rows = 4, columns = 4) => {
 
   return newTiles;
 };
+
+export const moveUp = (tiles = [], rows = 4, columns = 4) => {
+  const newTiles = [...tiles];
+
+  for (let i = columns; i < newTiles.length; i++) {
+    if (newTiles[i - columns]) {
+      if (newTiles[i - columns] === newTiles[i]) {
+        newTiles[i - columns] = newTiles[i - columns] + newTiles[i];
+        newTiles[i] = null;
+      }
+    } else {
+      newTiles[i - columns] = newTiles[i];
+      newTiles[i] = null;
+    }
+  }
+
+  return newTiles;
+};
